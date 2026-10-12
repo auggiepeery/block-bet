@@ -8,13 +8,9 @@ body{font-family:"Nunito",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;bac
 .best{display:flex;align-items:center;gap:6px;color:#f5a623;font-weight:900;font-size:28px;text-shadow:0 2px 0 #0002}
 .best svg{width:44px;height:34px}
 .icons{display:flex;gap:10px;align-items:center}
-.pill{display:flex;align-items:center;gap:6px;background:#26365f;border-radius:999px;padding:4px 12px 4px 4px;font-weight:800;font-size:16px;box-shadow:inset 0 1px 0 #ffffff1a}
-.chip{width:24px;height:24px;border-radius:50%;background:radial-gradient(circle,#ffd54a 45%,#e8a412 47%,#e8a412 58%,#fff3b0 60%,#fff3b0 66%,#e8a412 68%);box-shadow:0 2px 0 #9a6a00}
 .ib{background:none;border:0;cursor:pointer;width:38px;height:38px;display:flex;align-items:center;justify-content:center}
 .ib svg{width:34px;height:34px;fill:#a9c4ef}
 #score{text-align:center;font-size:58px;font-weight:900;line-height:1.1;margin:6px 0 2px}
-#betStatus{text-align:center;font-size:13px;font-weight:700;color:#c9d6f5;min-height:18px}
-#betStatus b{color:#ffd23f}
 #board{position:relative;aspect-ratio:1;background:#1f2a4f;border:3px solid #4a62a3;border-radius:10px;display:grid;grid-template-columns:repeat(8,1fr);gap:0;box-shadow:0 0 0 2px #2a3a6a,0 6px 14px #0003;overflow:hidden}
 .cell{background:#222d55;border:1px solid #17203f;transition:transform .2s,opacity .2s}
 .f,.blk{border:0;border-radius:3px;box-shadow:inset 3px 3px 0 #ffffff66,inset -3px -3px 0 #00000038,2px 3px 3px #0004}
@@ -40,13 +36,9 @@ input[type=range]{width:100%;margin:10px 0;accent-color:#f5a623}
 .row{display:flex;justify-content:space-between;align-items:center;margin:8px 0;font-weight:700}
 #toast{position:fixed;top:40%;left:50%;transform:translate(-50%,-50%);font-size:32px;font-weight:900;text-shadow:0 3px 8px #0008;pointer-events:none;opacity:0;transition:opacity .3s;z-index:70;text-align:center}
 </style></head><body><div id="app">
-<div class="top"><div class="best"><svg viewBox="0 0 44 34"><path fill="#1f2a4f" d="M4 10l9 8 9-14 9 14 9-8-4 18H8z"/><rect x="8" y="29" width="28" height="4" rx="1" fill="#1f2a4f"/><circle cx="4" cy="9" r="3" fill="#1f2a4f"/><circle cx="22" cy="4" r="3" fill="#1f2a4f"/><circle cx="40" cy="9" r="3" fill="#1f2a4f"/></svg><span id="best">0</span></div><div class="icons"><div class="pill"><span class="chip"></span><span id="chips">0</span></div><button class="ib" id="gear" aria-label="Settings"><svg viewBox="0 0 24 24"><path d="M19.4 13a7.5 7.5 0 000-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 00-1.7-1L15 3h-4l-.4 2.7a7.4 7.4 0 00-1.7 1l-2.5-1-2 3.5L6.5 11a7.5 7.5 0 000 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 001.7 1L11 21h4l.4-2.7a7.4 7.4 0 001.7-1l2.5 1 2-3.5zM13 15.5A3.5 3.5 0 1113 8.5a3.5 3.5 0 010 7z"/></svg></button></div></div>
-<div id="score">0</div><div id="betStatus"></div><div id="board"></div><div id="tray"></div><div id="streak"></div></div>
-<div id="setO" class="overlay hide"><div class="panel"><h2>Settings</h2><div class="row">Sound<button class="btn alt" id="snd" style="flex:0 0 120px">On</button></div><div class="row">Ask to bet each set<button class="btn alt" id="askB" style="flex:0 0 120px">On</button></div><div class="btns"><button class="btn alt" id="restart">New game</button><button class="btn" id="setClose">Close</button></div></div></div>
-<div id="betO" class="overlay hide"><div class="panel"><h2>Place your bet</h2><p style="font-size:13px">Clear at least N lines with the next 3 pieces</p>
-<div class="opts" id="tg"></div><div>Wager: <b id="wv">0</b> chips <span style="opacity:.6">(of <span id="wc"></span>)</span></div>
-<input type="range" id="wr" min="0" value="0"><div class="qb"><button data-q=".1">10%</button><button data-q=".25">25%</button><button data-q=".5">50%</button><button data-q="1">All-in</button></div>
-<div class="btns"><button class="btn alt" id="skip">Skip</button><button class="btn" id="go">Bet!</button></div></div></div>
+<div class="top"><div class="best"><svg viewBox="0 0 44 34"><path fill="#1f2a4f" d="M4 10l9 8 9-14 9 14 9-8-4 18H8z"/><rect x="8" y="29" width="28" height="4" rx="1" fill="#1f2a4f"/><circle cx="4" cy="9" r="3" fill="#1f2a4f"/><circle cx="22" cy="4" r="3" fill="#1f2a4f"/><circle cx="40" cy="9" r="3" fill="#1f2a4f"/></svg><span id="best">0</span></div><div class="icons"><button class="ib" id="gear" aria-label="Settings"><svg viewBox="0 0 24 24"><path d="M19.4 13a7.5 7.5 0 000-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 00-1.7-1L15 3h-4l-.4 2.7a7.4 7.4 0 00-1.7 1l-2.5-1-2 3.5L6.5 11a7.5 7.5 0 000 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 001.7 1L11 21h4l.4-2.7a7.4 7.4 0 001.7-1l2.5 1 2-3.5zM13 15.5A3.5 3.5 0 1113 8.5a3.5 3.5 0 010 7z"/></svg></button></div></div>
+<div id="score">0</div><div id="board"></div><div id="tray"></div><div id="streak"></div></div>
+<div id="setO" class="overlay hide"><div class="panel"><h2>Settings</h2><div class="row">Sound<button class="btn alt" id="snd" style="flex:0 0 120px">On</button></div><div class="btns"><button class="btn alt" id="restart">New game</button><button class="btn" id="setClose">Close</button></div></div></div>
 <div id="overO" class="overlay hide"><div class="panel"><h2>Game Over</h2><p id="ovT"></p><div class="btns"><button class="btn" id="again">Play again</button></div></div></div>
 <div id="toast"></div>
 <script>
@@ -55,16 +47,15 @@ const N=8,COL=['#f2b632','#2fb5e8','#f07a2a','#e94b5b','#5cc94a','#8a5cf0','#ef6
 const SH=[[[0,0]],[[0,0],[0,1]],[[0,0],[1,0]],[[0,0],[0,1],[0,2]],[[0,0],[1,0],[2,0]],[[0,0],[0,1],[0,2],[0,3]],[[0,0],[1,0],[2,0],[3,0]],[[0,0],[0,1],[0,2],[0,3],[0,4]],[[0,0],[1,0],[2,0],[3,0],[4,0]],
 [[0,0],[0,1],[1,0],[1,1]],[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]],[[0,0],[1,0],[1,1]],[[0,1],[1,0],[1,1]],[[0,0],[0,1],[1,0]],[[0,0],[0,1],[1,1]],
 [[0,0],[1,0],[2,0],[2,1]],[[0,1],[1,1],[2,1],[2,0]],[[0,0],[0,1],[0,2],[1,1]],[[0,0],[0,1],[1,1],[1,2]],[[0,1],[0,2],[1,0],[1,1]],[[0,0],[1,0],[2,0],[2,1],[2,2]],[[0,0],[0,1],[0,2],[1,0],[2,0]],[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2]]];
-const TG=[{n:1,m:1.5},{n:2,m:2.5},{n:3,m:5}];
+
 const $=id=>document.getElementById(id);
-let g,cells=[],pieces=[],score,combo,lastClear,bet=null,setLines,best=+localStorage.bbBest||0,chips=localStorage.bbChips==null?1000:+localStorage.bbChips,sound=localStorage.bbSnd!=='0',askBet=localStorage.bbAsk!=='0',tSel=0;
-const save=()=>{localStorage.bbBest=best;localStorage.bbChips=chips};
+let g,cells=[],pieces=[],score,combo,lastClear,best=+localStorage.bbBest||0,sound=localStorage.bbSnd!=='0';
+const save=()=>{localStorage.bbBest=best;localStorage.removeItem('bbChips');localStorage.removeItem('bbAsk')};
 let ac;function beep(f,d=.08,t='sine',v=.15){if(!sound)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),gn=ac.createGain();o.type=t;o.frequency.value=f;gn.gain.setValueAtTime(v,ac.currentTime);gn.gain.exponentialRampToValueAtTime(.001,ac.currentTime+d);o.connect(gn).connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
 const B=$('board');for(let i=0;i<N*N;i++){const c=document.createElement('div');c.className='cell';B.appendChild(c);cells.push(c)}
 function render(){for(let r=0;r<N;r++)for(let c=0;c<N;c++){const e=cells[r*N+c],v=g[r][c];e.className='cell'+(v?' f':'');e.style.borderRadius='';e.style.background=v||''}
-$('score').textContent=score;$('askB').textContent=askBet?'On':'Off';$('best').textContent=best;$('chips').textContent=chips;$('snd').textContent=sound?'On':'Off';
-$('streak').textContent=combo>1?'🔥 Streak x'+combo:'';
-$('betStatus').innerHTML=bet?`Bet <b>${bet.w}</b> on ≥${bet.n}${bet.n==3?'+':''} lines → <b>${Math.floor(bet.w*bet.m)}</b> · lines ${setLines}/${bet.n}`+(setLines>=bet.n?' ✅':''):''}
+$('score').textContent=score;$('best').textContent=best;$('snd').textContent=sound?'On':'Off';
+$('streak').textContent=combo>1?'🔥 Streak x'+combo:'';}
 function toast(t,c='#fff'){const e=$('toast');e.innerHTML=t;e.style.color=c;e.style.opacity=1;clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.opacity=0,1100)}
 function fits(s,r,c){return s.every(([dr,dc])=>{const y=r+dr,x=c+dc;return y>=0&&x>=0&&y<N&&x<N&&!g[y][x]})}
 function canPlace(s){for(let r=0;r<N;r++)for(let c=0;c<N;c++)if(fits(s,r,c))return true;return false}
@@ -73,7 +64,7 @@ function drawTray(){const T=$('tray');T.innerHTML='';pieces.forEach((p,i)=>{cons
 function mk(p,sz){const el=document.createElement('div');const h=Math.max(...p.s.map(a=>a[0]))+1,w=Math.max(...p.s.map(a=>a[1]))+1;el.style.gridTemplateColumns=`repeat(${w},${sz}px)`;el.style.gridTemplateRows=`repeat(${h},${sz}px)`;
 p.s.forEach(([r,c])=>{const d=document.createElement('div');d.className='blk';d.style.cssText=`grid-row:${r+1};grid-column:${c+1};width:${sz}px;height:${sz}px;background:${p.col}`;el.appendChild(d)});return el}
 let drag=null;const drag0=()=>cells[0].getBoundingClientRect().width*.55;
-function startDrag(e,i,src){if(bet===undefined)return;e.preventDefault();const p=pieces[i],cs=cells[0].getBoundingClientRect().width;const el=mk(p,cs);el.className='drag';document.body.appendChild(el);src.style.opacity=.2;
+function startDrag(e,i,src){e.preventDefault();const p=pieces[i],cs=cells[0].getBoundingClientRect().width;const el=mk(p,cs);el.className='drag';document.body.appendChild(el);src.style.opacity=.2;
 const lift=e.pointerType==='touch'?80:20;drag={i,p,el,src,cs,lift,pos:null};moveDrag(e);beep(500,.04)}
 function moveDrag(e){if(!drag)return;const{el,cs,lift}=drag;const w=el.offsetWidth,h=el.offsetHeight;const x=e.clientX-w/2,y=e.clientY-h-lift;el.style.left=x+'px';el.style.top=y+'px';
 const br=cells[0].getBoundingClientRect(),st=cs;const c=Math.round((x-br.left)/st),r=Math.round((y-br.top)/st);
@@ -86,7 +77,7 @@ addEventListener('pointermove',moveDrag,{passive:false});addEventListener('point
 let busy=false;
 function place(i,r,c){const p=pieces[i];p.s.forEach(([dr,dc])=>g[r+dr][c+dc]=p.col);p.used=true;score+=p.s.length;beep(300,.06,'triangle');
 const{rows,cols}=full(g),n=rows.length+cols.length;
-if(n){combo=lastClear?combo+1:1;lastClear=true;setLines+=n;const pts=n*10*n*(combo);score+=pts;
+if(n){combo=lastClear?combo+1:1;lastClear=true;const pts=n*10*n*(combo);score+=pts;
 const ks=new Set();rows.forEach(y=>{for(let x=0;x<N;x++)ks.add(y*N+x)});cols.forEach(x=>{for(let y=0;y<N;y++)ks.add(y*N+x)});
 render();ks.forEach(k=>cells[k].classList.add('clr'));busy=true;
 [523,659,784,1046].slice(0,1+Math.min(3,n)).forEach((f,j)=>setTimeout(()=>beep(f,.12,'square',.08),j*70));
@@ -94,22 +85,13 @@ toast((n>1?n+' LINES!':'CLEAR!')+'<br><small>+'+pts+(combo>1?' · combo x'+combo
 setTimeout(()=>{ks.forEach(k=>g[k/N|0][k%N]=0);busy=false;after()},360)}
 else{lastClear=lastClear&&false;combo=lastClear?combo:0;after()}}
 function after(){if(score>best)best=score;save();
-if(pieces.every(p=>p.used)){settle();render();openBet();return}
+if(pieces.every(p=>p.used)){newPieces();render();if(!pieces.some(p=>canPlace(p.s)))gameOver();return}
 render();drawTray();if(!pieces.some(p=>!p.used&&canPlace(p.s)))gameOver()}
-function settle(){if(!bet)return;if(setLines>=bet.n){const win=Math.floor(bet.w*bet.m);chips+=win;toast('🎉 BET WON!<br><small>+'+win+' chips</small>','#4dff9a');beep(880,.3,'sine',.2)}else{toast('💸 Bet lost<br><small>-'+bet.w+' chips</small>','#ff8080');beep(150,.3,'sawtooth',.1)}bet=null;refill();save()}
-function refill(){if(chips<=0){chips=100;setTimeout(()=>toast('🎁 Free refill: 100 chips','#7fe0ff'),1200)}}
-function openBet(){bet=undefined;setLines=0;newPieces();
-const tg=$('tg');tg.innerHTML='';TG.forEach((t,k)=>{const b=document.createElement('button');b.className='opt'+(k==tSel?' sel':'');b.innerHTML=`≥${t.n}${t.n==3?'+':''} line${t.n>1?'s':''}<br><small>${t.m}x</small>`;b.onclick=()=>{tSel=k;[...tg.children].forEach((x,j)=>x.classList.toggle('sel',j==k))};tg.appendChild(b)});
-const wr=$('wr');wr.max=chips;wr.value=Math.min(+wr.value||Math.floor(chips*.1),chips);$('wv').textContent=wr.value;$('wc').textContent=chips;if(askBet)$('betO').classList.remove('hide');else closeBet(0)}
-$('wr').oninput=e=>$('wv').textContent=e.target.value;
-document.querySelectorAll('.qb button').forEach(b=>b.onclick=()=>{$('wr').value=Math.floor(chips*b.dataset.q);$('wv').textContent=$('wr').value});
-function closeBet(w){$('betO').classList.add('hide');if(w>0){chips-=w;bet={w,n:TG[tSel].n,m:TG[tSel].m};beep(660,.1)}else bet=null;save();render();drawTray();if(!pieces.some(p=>canPlace(p.s)))gameOver()}
-$('go').onclick=()=>closeBet(Math.min(+$('wr').value,chips));$('skip').onclick=()=>closeBet(0);
-function gameOver(){if(bet){toast('💸 Bet lost','#ff8080');bet=null;refill()}save();render();setTimeout(()=>{$('ovT').innerHTML=`Score: <b>${score}</b><br>Best: <b>${best}</b><br>Chips: <b>${chips}</b>`;$('overO').classList.remove('hide')},600);beep(200,.5,'sawtooth',.1)}
-function start(){g=Array.from({length:N},()=>Array(N).fill(0));score=0;combo=0;lastClear=false;bet=null;setLines=0;refill();$('overO').classList.add('hide');render();openBet()}
-$('again').onclick=start;$('restart').onclick=()=>{if(confirm('Start a new game? (active bet is forfeited)')){$('setO').classList.add('hide');start()}};$('gear').onclick=()=>$('setO').classList.remove('hide');$('setClose').onclick=()=>$('setO').classList.add('hide');$('askB').onclick=()=>{askBet=!askBet;localStorage.bbAsk=askBet?1:0;render()};
+function gameOver(){save();render();setTimeout(()=>{$('ovT').innerHTML=`Score: <b>${score}</b><br>Best: <b>${best}</b>`;$('overO').classList.remove('hide')},600);beep(200,.5,'sawtooth',.1)}
+function start(){g=Array.from({length:N},()=>Array(N).fill(0));score=0;combo=0;lastClear=false;$('overO').classList.add('hide');newPieces();render()}
+$('again').onclick=start;$('restart').onclick=()=>{if(confirm('Start a new game?')){$('setO').classList.add('hide');start()}};$('gear').onclick=()=>$('setO').classList.remove('hide');$('setClose').onclick=()=>$('setO').classList.add('hide');
 $('snd').onclick=()=>{sound=!sound;localStorage.bbSnd=sound?1:0;render()};
-window.__bb={get g(){return g},place:(i,r,c)=>place(i,r,c),get pieces(){return pieces},closeBet};
+window.__bb={get g(){return g},place:(i,r,c)=>place(i,r,c),get pieces(){return pieces}};
 start();
 })();
 </script></body></html>
